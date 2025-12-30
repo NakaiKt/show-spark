@@ -1,0 +1,120 @@
+---
+alwaysApply: true
+---
+
+# Cursor 開発ルール
+
+## README.md を読んでから作業すること
+
+このプロジェクトの詳細な仕様は README.md に記載されています。
+
+## コード補完時の優先度
+
+1. shadcn/ui 既存コンポーネントを優先
+2. TypeScript の型安全性を最優先（`any` 禁止）
+3. Server Components と Client Components を明確に区別
+
+## 新規ファイル作成時のテンプレート
+
+### API Routes
+
+```typescript
+import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+
+export async function GET/POST/PATCH/DELETE(req: Request) {
+  try {
+    const supabase = await createClient()
+
+    // 1. 認証チェック
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
+      return NextResponse.json({ data: null, error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // 2. バリデーション（Zod）
+
+    // 3. ビジネスロジック
+
+    // 4. レスポンス
+    return NextResponse.json({ data, error: null })
+  } catch (error) {
+    return NextResponse.json({
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
+  }
+}
+```
+
+### Realtime カスタムフック
+
+```typescript
+"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { Database } from "@/lib/supabase/database.types";
+
+type Season = Database["public"]["Tables"]["seasons"]["Row"];
+
+export function useRealtimeSeasons(userId: string) {
+  const [seasons, setSeasons] = useState<Season[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    // 初期データ取得
+    const fetchSeasons = async () => {
+      const { data } = await supabase
+        .from("seasons")
+        .select("*")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false });
+
+      if (data) setSeasons(data);
+    };
+
+    fetchSeasons();
+
+    // Realtime購読
+    const channel = supabase
+      .channel("seasons_changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "seasons",
+          filter: `user_id=eq.${userId}`,
+        },
+        (payload) => {
+          // INSERT, UPDATE, DELETE に応じて state 更新
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId]);
+
+  return seasons;
+}
+```
+
+## レビュー時のチェックリスト
+
+- [ ] README.md のアーキテクチャ方針に従っているか
+- [ ] RLS ポリシーは適切か
+- [ ] エラーハンドリングは十分か
+- [ ] 型定義は正確か（`any` を使っていないか）
+- [ ] Realtime はカスタムフックでラップされているか
+- [ ] マイグレーションファイルは冪等か（DROP IF EXISTS → CREATE）
+
+## 命名規則
+
+- テーブル：複数形（users, seasons, contents）
+- カラム：スネークケース（created_at, user_id）
+- コンポーネント：PascalCase（SeasonCard.tsx）
+- フック：use プレフィックス（useRealtimeSeasons）
+- API Routes：RESTful 命名（/api/seasons, /api/seasons/[id]）
