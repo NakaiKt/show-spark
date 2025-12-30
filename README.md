@@ -289,8 +289,6 @@ npx supabasae init
 
 ## supabase コマンド
 
-docker 起動後
-
 ```
 # 起動
 npx supabase start
@@ -305,7 +303,7 @@ npx supabase stop --no-backup
 npx supabase status
 
 # データベースのリセット（コンテナは起動したまま）
-npx supabase db reset
+npm run db:reset
 ```
 
 ### データベース定義周り

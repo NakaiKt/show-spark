@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:build-seed": "node scripts/build-seed.js",
+    "db:reset": "npm run db:build-seed && supabase db reset",
+    "db:seed": "npm run db:build-seed && supabase db seed"
   },
   "repository": {
     "type": "git",
