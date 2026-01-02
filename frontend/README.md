@@ -5,10 +5,10 @@
 docker 起動コマンド
 
 ```bash
-docker build -t syncspire-frontend .
+docker build -t showspark .
 
 # Windows
-docker run -it -p 3000:3000 -v ${PWD}:/app --name syncspire-frontend --rm syncspire-frontend
+docker run -it -p 3000:3000 -v ${PWD}:/app --name showspark --rm showspark
 # Mac
-docker run -it -p 3000:3000 -v $(pwd):/app --name syncspire-frontend --rm syncspire-frontend
+docker run -it -p 3000:3000 -v $(pwd):/app --name showspark --rm showspark
 ```

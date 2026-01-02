@@ -316,10 +316,4 @@ supabase migration new <マイグレーション名>
 supabase migration new create_users_table
 # → supabase/migrations/20241216120000_create_users_table.sql
 
-# すべてのマイグレーションを再実行（DB初期化）（ローカル）
-supabase db reset
-
-# または差分マイグレーションのみ実行（ローカル）
-supabase migration up
-
 ```
