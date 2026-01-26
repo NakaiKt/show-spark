@@ -88,7 +88,8 @@
 - **API 仕様**：Next.js API Routes（RESTful）
 - **インフラ構築**：Supabase ダッシュボード + CLI で管理
 - **バージョン管理**：GitHub
-- **開発環境**：Docker（Supabase CLI）
+- **開発環境**：ローカル（Node.js + Supabase CLI）
+- **Node.js バージョン管理**：fnm（推奨）
 
 ### 学習目標
 
@@ -286,3 +287,89 @@ supabase migration new create_users_table
 # → supabase/migrations/20241216120000_create_users_table.sql
 
 ```
+
+# フロントエンド開発環境
+
+## 前提条件
+
+- Node.js 24 以上
+- 推奨: [fnm](https://github.com/Schniz/fnm) でバージョン管理
+
+## fnm セットアップ（Windows PowerShell）
+
+### インストール
+
+```powershell
+# wingetでインストール（推奨）
+winget install Schniz.fnm
+
+# または scoop
+scoop install fnm
+```
+
+### シェル設定
+
+PowerShell プロファイルに追加（一度だけ）:
+
+```powershell
+# プロファイルを開く
+notepad $PROFILE
+
+# 以下を追記して保存
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+```
+
+PowerShell を再起動。
+
+### 基本コマンド
+
+```powershell
+# Node.js インストール
+fnm install 24          # v24系の最新
+fnm install --lts       # 最新LTS
+
+# インストール済み一覧
+fnm list
+
+# バージョン切り替え（手動）
+fnm use 24
+
+# デフォルトバージョン設定
+fnm default 24
+
+# 現在のバージョン確認
+node -v
+```
+
+### 自動切り替え
+
+シェル設定で `--use-on-cd` を有効にしていれば、`.node-version` ファイルがあるディレクトリに `cd` すると自動で切り替わります。
+
+```powershell
+# プロジェクトルートに移動すると自動でv24.13.0に切り替わる
+cd show-spark
+node -v  # → v24.13.0
+```
+
+## フロントエンド起動
+
+```powershell
+# ターミナル1: Supabase起動
+npx supabase start
+
+# ターミナル2: フロントエンド起動
+cd frontend
+npm install   # 初回のみ
+npm run dev
+```
+
+## 環境変数
+
+`frontend/.env.local` を作成:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<supabase statusで表示されるanon key>
+```
+
+※ `npx supabase status` で表示される値を使用
