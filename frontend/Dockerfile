@@ -7,7 +7,3 @@
 FROM node:25-alpine AS base
 
 WORKDIR /app
-EXPOSE 3000
-
-ENTRYPOINT [""]
-CMD ["/bin/sh"]

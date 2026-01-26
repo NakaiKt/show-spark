@@ -145,6 +145,8 @@
 
 #### ✅ Next.js API Routes（アプリ層）に置くもの
 
+※簡易な API はフロント側で定義
+
 - ビジネスロジック
   - 例：「18 歳未満は特定機能を使えない」
   - 例：「1 シーズンあたり最大 50 作品まで」
@@ -163,39 +165,6 @@
 - リアルタイム購読
   - Supabase の Realtime 機能を直接使用
   - API Routes 経由ではなく、フロントエンドから直接購読
-
-### ディレクトリ構成
-
-```
-show-spark/
-├── app/                      # Next.js App Router
-│   ├── api/                  # Next.js API Routes（ビジネスロジック）
-│   │   ├── seasons/
-│   │   ├── contents/
-│   │   ├── users/
-│   │   └── dashboard/
-│   ├── (auth)/               # 認証関連ページ
-│   ├── dashboard/            # ダッシュボード
-│   ├── seasons/[id]/         # シーズン詳細
-│   └── ...
-├── components/               # UIコンポーネント
-│   ├── ui/                   # shadcn/ui
-│   └── features/             # 機能別コンポーネント
-├── hooks/                    # カスタムフック
-│   ├── useRealtimeSeasons.ts
-│   ├── useRealtimeContents.ts
-│   └── ...
-├── lib/                      # ユーティリティ
-│   ├── supabase/
-│   │   ├── client.ts         # クライアント用Supabaseクライアント
-│   │   └── server.ts         # サーバー用Supabaseクライアント
-│   └── utils.ts
-├── supabase/                 # Supabase関連
-│   ├── migrations/           # DBマイグレーション
-│   ├── functions/            # Edge Functions（必要時のみ）
-│   └── config.toml
-└── ...
-```
 
 ### 開発ルール
 

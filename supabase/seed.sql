@@ -22,7 +22,7 @@
     ) VALUES (
         '11111111-1111-1111-1111-111111111111'::uuid,
         '00000000-0000-0000-0000-000000000000'::uuid,
-        'tanaka@example.com',
+        'katsh1618+showspark@gmail.com',
         crypt('password', gen_salt('bf')),
         NOW(),
         '{"provider": "email", "providers": ["email"]}',
