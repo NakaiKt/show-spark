@@ -68,11 +68,13 @@ README.md には以下が記載されています：
 | -------------------- | --------------------- | ---------------------------------- |
 | データ整合性制約     | Supabase（DB 層）     | NOT NULL, UNIQUE, CHECK, FK で保証 |
 | 認証・認可           | Supabase（RLS）       | auth.uid() でユーザー識別          |
+| **全てのCRUD**       | Next.js API Routes    | ロジック配置の一貫性確保           |
 | ビジネスロジック     | Next.js API Routes    | 「18 歳未満は機能制限」など        |
-| 複雑なバリデーション | Next.js API Routes    | Zod で定義                         |
+| バリデーション       | Next.js API Routes    | Zod で定義                         |
 | 外部 API 連携        | Next.js API Routes    | アニメ情報 API など                |
-| 単純な CRUD          | Supabase 直接アクセス | RLS で十分な場合                   |
-| Realtime 購読        | フロントエンド        | カスタムフック化必須               |
+| Realtime 購読        | フロントエンド        | カスタムフック化必須（購読のみ）   |
+
+**注意**: フロントエンドからSupabaseへの直接アクセスは「Realtime購読のみ」に限定。データの読み書きは全てAPI Routes経由。
 
 ## 回答スタイル
 
