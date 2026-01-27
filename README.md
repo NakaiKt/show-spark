@@ -312,14 +312,19 @@ scoop install fnm
 PowerShell プロファイルに追加（一度だけ）:
 
 ```powershell
-# プロファイルを開く
+# 1. プロファイルファイルを作成
+New-Item -Path $PROFILE -Type File -Force
+
+# 2. notepadで開く
 notepad $PROFILE
 
-# 以下を追記して保存
+# 3. 以下を追記して保存
 fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+
+# 4. PowerShellを再起動
+
 ```
 
-PowerShell を再起動。
 
 ### 基本コマンド
 
