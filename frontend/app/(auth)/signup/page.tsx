@@ -14,10 +14,10 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-const SigninPage = () => {
+const SignupPage = () => {
   const { form, signIn, isLoading, emailSent, resetEmailSent } = useAuth();
 
-  const handleSigninWithMagicLink = form.handleSubmit(async (data) => {
+  const handleSignupWithMagicLink = form.handleSubmit(async (data) => {
     await signIn.signInWithMagicLink(data.email);
   });
 
@@ -27,8 +27,8 @@ const SigninPage = () => {
         <CardHeader>
           <CardTitle>メールを確認してください</CardTitle>
           <CardDescription>
-            入力されたメールアドレスにサインインリンクを送信しました。
-            メールに記載されたリンクをクリックしてサインインしてください。
+            入力されたメールアドレスに登録用リンクを送信しました。
+            メールに記載されたリンクをクリックして登録を完了してください。
           </CardDescription>
         </CardHeader>
         <CardFooter>
@@ -43,14 +43,14 @@ const SigninPage = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>サインイン</CardTitle>
+        <CardTitle>新規登録</CardTitle>
         <CardDescription>
-          <Link href="/signup" className="text-primary hover:underline">
-            新規登録はこちら
+          <Link href="/signin" className="text-primary hover:underline">
+            すでにアカウントをお持ちの方はこちら
           </Link>
         </CardDescription>
       </CardHeader>
-      <form onSubmit={handleSigninWithMagicLink}>
+      <form onSubmit={handleSignupWithMagicLink}>
         <CardContent>
           <div className="space-y-4">
             <div>
@@ -71,7 +71,7 @@ const SigninPage = () => {
         </CardContent>
         <CardFooter className="flex flex-col gap-2">
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "送信中..." : "メールでサインイン"}
+            {isLoading ? "送信中..." : "メールで登録"}
           </Button>
           <div className="relative w-full">
             <div className="absolute inset-0 flex items-center">
@@ -90,7 +90,7 @@ const SigninPage = () => {
             onClick={signIn.signInWithGoogle}
             disabled={isLoading}
           >
-            Googleでサインイン
+            Googleで登録
           </Button>
         </CardFooter>
       </form>
@@ -98,4 +98,4 @@ const SigninPage = () => {
   );
 };
 
-export default SigninPage;
+export default SignupPage;
