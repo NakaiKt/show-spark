@@ -146,15 +146,17 @@
 
 #### ✅ Next.js API Routes（アプリ層）に置くもの
 
-**※全てのDB操作はAPI Routes経由で行う（単純CRUDも含む）**
+**※全ての DB 操作は API Routes 経由で行う（単純 CRUD も含む）**
 
 理由：
-- ロジックの配置場所が明確（「どこを見ればいい？」問題の解消）
+
+- ロジックの配置場所が明確
 - 後から複雑なロジックが必要になっても移動不要
 - バリデーション・エラーハンドリングが統一される
 
 対象：
-- **全てのCRUD操作**（単純なものも含む）
+
+- **全ての CRUD 操作**（単純なものも含む）
 - ビジネスロジック
   - 例：「18 歳未満は特定機能を使えない」
   - 例：「1 シーズンあたり最大 50 作品まで」
@@ -169,11 +171,11 @@
 #### ✅ フロントエンド（React）に置くもの
 
 - UI/UX
-- フォームバリデーション（クライアント側、UX向上目的）
-- API呼び出し（fetch / SWR / React Query等）
-- **リアルタイム購読のみSupabase直接**
+- フォームバリデーション（クライアント側、UX 向上目的）
+- API 呼び出し（fetch / SWR / React Query 等）
+- **リアルタイム購読のみ Supabase 直接**
   - Supabase の Realtime 機能を直接使用
-  - 購読（subscribe）のみフロントから直接、データ更新はAPI経由
+  - 購読（subscribe）のみフロントから直接、データ更新は API 経由
 
 ### 開発ルール
 
@@ -333,7 +335,6 @@ fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 
 ```
 
-
 ### 基本コマンド
 
 ```powershell
@@ -386,3 +387,13 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<supabase statusで表示されるanon key>
 ```
 
 ※ `npx supabase status` で表示される値を使用
+
+## ローカル開発でのメール確認
+
+ローカル環境のメールは **Inbucket**（ローカルのメールキャッチャー）を使用
+
+Magic Link 等の認証メールを確認するには：
+
+```
+http://localhost:54324
+```
