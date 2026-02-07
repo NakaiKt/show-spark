@@ -284,6 +284,9 @@ npx supabase status
 
 # データベースのリセット（コンテナは起動したまま）
 npm run db:reset
+
+# 開発環境にデプロイ
+npx supabase db push
 ```
 
 ### データベース定義周り
