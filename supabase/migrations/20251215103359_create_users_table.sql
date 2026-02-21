@@ -6,14 +6,14 @@ CREATE TABLE public.users (
     theme TEXT CHECK (theme IN ('light', 'dark', 'system')) DEFAULT 'system',
     display_user_info BOOLEAN DEFAULT FALSE,
     timezone TEXT DEFAULT 'Asia/Tokyo',
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- updated_atトリガー
-CREATE TRIGGER set_updated_at
-BEFORE UPDATE ON public.users
-FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+SELECT setup_updated_at_trigger('users');
+
+
 
 -- Google認証時に自動的にプロフィール作成
 CREATE OR REPLACE FUNCTION public.handle_new_user()
