@@ -51,10 +51,10 @@ npx supabase db push
 
 ```
 # タイムスタンプ付きでマイグレーションファイルを自動生成
-supabase migration new <マイグレーション名>
+npx supabase migration new <マイグレーション名>
 
 # 例
-supabase migration new create_users_table
+npx supabase migration new create_users_table
 # → supabase/migrations/20241216120000_create_users_table.sql
 
 ```
