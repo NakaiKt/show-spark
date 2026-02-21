@@ -26,7 +26,7 @@ erDiagram
     Users {
         uuid id PK
         string name
-        string avatar_url "supabaseのstrage url"
+        string avatar_url "nullable, supabaseのstrage url"
         integer theme_id FK
         boolean display_user_info "d = false"
         string timezone "d = Asia/Tokyo"
