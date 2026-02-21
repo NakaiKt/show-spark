@@ -1,0 +1,10 @@
+# コーディング規約の確認
+コーディング規約ファイルはディレクトリ： `/doc/dev-rule` に配置されています。
+
+## supabase
+`./supabase` ディレクトリのファイルについて
+
+| ディレクトリ | 対象コーディング規約ファイル |
+| ------------- | ---------------------------- |
+| /migrations | /supabase/migrations.md |
+| /seeds | /supabase/seeds.md |
