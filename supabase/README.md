@@ -29,7 +29,21 @@ npx supabase status
 # データベースのリセット（コンテナは起動したまま）
 npm run db:reset
 
-# 開発環境にデプロイ
+```
+
+### devにデプロイ
+
+プロジェクトrefはsupabaseプロジェクトページのリンクの中にある
+`https://supabase.com/dashboard/project/{ここがプロジェクトref}`
+
+```
+# 1. ログイン
+npx supabase login
+
+# 2. プロジェクトref設定
+npx supabase link --project-ref {プロジェクトref}
+
+# 3. 開発環境にデプロイ
 npx supabase db push
 ```
 
