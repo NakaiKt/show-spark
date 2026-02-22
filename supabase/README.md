@@ -31,7 +31,20 @@ npm run db:reset
 
 ```
 
-### devにデプロイ
+### データベース定義周り
+
+```
+# タイムスタンプ付きでマイグレーションファイルを自動生成
+npx supabase migration new <マイグレーション名>
+
+# 例
+npx supabase migration new create_users_table
+# → supabase/migrations/20241216120000_create_users_table.sql
+
+```
+
+### devにデプロイ（手動）
+develop, mainブランチにマージで自動プッシュされるが、手動でもできる
 
 プロジェクトrefはsupabaseプロジェクトページのリンクの中にある
 `https://supabase.com/dashboard/project/{ここがプロジェクトref}`
@@ -45,16 +58,4 @@ npx supabase link --project-ref {プロジェクトref}
 
 # 3. 開発環境にデプロイ
 npx supabase db push
-```
-
-### データベース定義周り
-
-```
-# タイムスタンプ付きでマイグレーションファイルを自動生成
-npx supabase migration new <マイグレーション名>
-
-# 例
-npx supabase migration new create_users_table
-# → supabase/migrations/20241216120000_create_users_table.sql
-
 ```
