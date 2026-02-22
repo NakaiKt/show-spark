@@ -64,15 +64,16 @@ npx supabase db push
 ## 環境変数確認方法（後で書く）
 
 **SUPABASE_ACCESS_TOKEN**
+個人設定から取得できる
+DBごとではなく、アカウント単位で存在（DB間で共通）
 
-settings -> general -> general settings -> project ID
-
-
+右上のアイコン -> account preferences -> Access Tokens
+で、必要だったら作成する
 
 **SUPABASE_DB_PASSWORD**
-
-
-
+Database -> settings
+パスワードは一度忘れたら再設定が必要
+`reset database password` ボタン
 
 
 **SUPABASE_PROJECT_ID**
@@ -83,7 +84,10 @@ settings -> general -> general settings -> project ID
 
 **SUPABASE_DB_URL**
 
-Supabase ダッシュボード > Project Settings > Database > Connection string > URI
+DBのダッシュボードヘッダーにある `Connect` ボタンクリック
+出てくるダイアログのDirect connectionのURL
+
+passwordは先程のDB passwordに置き換える
 
 ## seedファイルの構成
 
