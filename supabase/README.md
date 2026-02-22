@@ -61,7 +61,7 @@ npx supabase link --project-ref {プロジェクトref}
 npx supabase db push
 ```
 
-## 環境変数確認方法
+## 環境変数確認方法（後で書く）
 
 **SUPABASE_ACCESS_TOKEN**
 
@@ -78,6 +78,8 @@ settings -> general -> general settings -> project ID
 **SUPABASE_PROJECT_ID**
 
 settings -> general -> general settings -> project ID
+
+
 
 **SUPABASE_DB_URL**
 
