@@ -14,7 +14,7 @@ INSERT INTO public.themes (
     NOW(),
     NOW()
 )
-ON CONFLICT (id) DO UPDATE SET
+ON CONFLICT (name) DO UPDATE SET
     name = EXCLUDED.name,
     name_jp = EXCLUDED.name_jp,
     updated_at = NOW();
