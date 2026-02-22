@@ -44,6 +44,7 @@ npx supabase migration new create_users_table
 ```
 
 ### devにデプロイ（手動）
+
 develop, mainブランチにマージで自動プッシュされるが、手動でもできる
 
 プロジェクトrefはsupabaseプロジェクトページのリンクの中にある
@@ -59,3 +60,39 @@ npx supabase link --project-ref {プロジェクトref}
 # 3. 開発環境にデプロイ
 npx supabase db push
 ```
+
+## 環境変数確認方法
+
+**SUPABASE_ACCESS_TOKEN**
+
+settings -> general -> general settings -> project ID
+
+
+
+**SUPABASE_DB_PASSWORD**
+
+
+
+
+
+**SUPABASE_PROJECT_ID**
+
+settings -> general -> general settings -> project ID
+
+**SUPABASE_DB_URL**
+
+Supabase ダッシュボード > Project Settings > Database > Connection string > URI
+
+## seedファイルの構成
+
+```
+supabase/seeds/
+├── local/   # ローカル開発用のみ（db:reset 時に適用）
+│   ├── 01_auth_users.sql
+│   └── 02_users.sql
+└── master/  # システム固定データ（dev/prodにも自動適用）
+    └── 01_themes.sql
+```
+
+`master/` 配下のファイルは develop/main へのマージのたびに自動で上書きUPSERTされる。
+固定値テーブル（themes等）はここで管理する。
